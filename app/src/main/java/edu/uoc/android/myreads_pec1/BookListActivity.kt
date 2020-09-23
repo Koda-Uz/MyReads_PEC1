@@ -41,14 +41,20 @@ class BookListActivity : AppCompatActivity() {
         setupRecyclerView(book_list)
     }
 
+    /**
+     * Sets up RecyclerView data
+     * Currently using mock values
+     */
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        // TODO: implement recyclerView
-
         recyclerView.adapter = RecyclerViewAdapter(createMockData(),
             twoPane, supportFragmentManager)
 
     }
 
+    /**
+     * Creates a simple array of mock data
+     * Will be replaced later
+     */
     private fun createMockData() : Array<String> {
         val count = 25
         val data = Array(count) { "it = $it" }

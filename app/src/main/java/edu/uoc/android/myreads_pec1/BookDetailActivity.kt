@@ -26,9 +26,10 @@ class BookDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
-        /**savedInstanceState is non-null when there is fragment state
-        saved from previous configurations of this activity
-        If savedInstanceState is null we must manually add the [BookDetailFragment]
+        /**
+         * savedInstanceState is non-null when there is fragment state
+         * saved from previous configurations of this activity
+         * If savedInstanceState is null we must manually add the [BookDetailFragment]
          */
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
