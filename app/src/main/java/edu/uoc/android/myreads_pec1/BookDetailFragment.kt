@@ -30,7 +30,11 @@ class BookDetailFragment : Fragment() {
          */
         arguments?.let {
             if (it.containsKey(ARG_ITEM_ID)) {
-                book = BookModel.ITEMS[it.getInt(ARG_ITEM_ID)]
+                /**
+                 * Locates book in [BookModel.BOOK_MAP]
+                 * Book id is not always equal to position in [BookModel.BOOKS]
+                 */
+                book = BookModel.BOOK_MAP[it.getInt(ARG_ITEM_ID)]
                 activity?.findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_layout)?.title = book?.title
             }
         }

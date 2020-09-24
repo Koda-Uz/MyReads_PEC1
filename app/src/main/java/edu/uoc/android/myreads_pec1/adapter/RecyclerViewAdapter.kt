@@ -89,7 +89,7 @@ class RecyclerViewAdapter(private val myData: MutableList<BookModel.BookItem>,
         val book = myData[position]
         holder.title.text = book.title
         holder.author.text = book.author
-        holder.id = position
+        holder.id = book.id
         with(holder.itemView) {
             tag = book
             setOnClickListener (onClickListener)

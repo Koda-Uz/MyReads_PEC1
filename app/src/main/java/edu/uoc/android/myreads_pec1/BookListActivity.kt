@@ -1,6 +1,8 @@
 package edu.uoc.android.myreads_pec1
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import edu.uoc.android.myreads_pec1.adapter.RecyclerViewAdapter
@@ -43,12 +45,39 @@ class BookListActivity : AppCompatActivity() {
     }
 
     /**
-     * Sets up RecyclerView with [BookModel.ITEMS]
+     * Adds menu_list to view
+     */
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_list, menu)
+        return true
+    }
+
+    /**
+     * Handles menu items and shorts [BookModel.BOOKS]
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.sort_by_title -> {
+                BookModel.BOOKS.sortBy { it.title }
+                setupRecyclerView(book_list)
+                true
+            }
+            R.id.sort_by_author -> {
+                BookModel.BOOKS.sortBy { it.author }
+                setupRecyclerView(book_list)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    /**
+     * Sets up RecyclerView with [BookModel.BOOKS]
      */
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter = RecyclerViewAdapter(BookModel.ITEMS,
+        recyclerView.adapter = RecyclerViewAdapter(BookModel.BOOKS,
             twoPane, supportFragmentManager)
 
     }
-
 }
