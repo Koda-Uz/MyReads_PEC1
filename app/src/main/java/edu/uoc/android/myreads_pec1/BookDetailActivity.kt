@@ -25,6 +25,9 @@ class BookDetailActivity : AppCompatActivity() {
         // Show the Up button in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        // book id
+        val bookId = intent.getIntExtra(BookDetailFragment.ARG_ITEM_ID, 0)
+
 
         /**
          * savedInstanceState is non-null when there is fragment state
@@ -34,7 +37,11 @@ class BookDetailActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
-            val fragment = BookDetailFragment()
+            val fragment = BookDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(BookDetailFragment.ARG_ITEM_ID, bookId)
+                }
+            }
 
             supportFragmentManager.beginTransaction()
                 .add(R.id.book_detail_container, fragment)

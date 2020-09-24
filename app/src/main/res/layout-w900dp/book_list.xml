@@ -15,7 +15,7 @@
         android:layout_width="@dimen/recyclerview_tablet_width"
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/view_holder" />
+        tools:listitem="@layout/view_holder_odd" />
 
     <FrameLayout
         android:id="@+id/book_detail_container"

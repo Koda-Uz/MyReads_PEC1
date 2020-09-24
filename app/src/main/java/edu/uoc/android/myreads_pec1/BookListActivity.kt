@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import edu.uoc.android.myreads_pec1.adapter.RecyclerViewAdapter
+import edu.uoc.android.myreads_pec1.model.BookModel
 import kotlinx.android.synthetic.main.activity_book_list.*
 import kotlinx.android.synthetic.main.book_list.*
 
@@ -42,26 +43,12 @@ class BookListActivity : AppCompatActivity() {
     }
 
     /**
-     * Sets up RecyclerView data
-     * Currently using mock values
+     * Sets up RecyclerView with [BookModel.ITEMS]
      */
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter = RecyclerViewAdapter(createMockData(),
+        recyclerView.adapter = RecyclerViewAdapter(BookModel.ITEMS,
             twoPane, supportFragmentManager)
 
-    }
-
-    /**
-     * Creates a simple array of mock data
-     * Will be replaced later
-     */
-    private fun createMockData() : Array<String> {
-        val count = 25
-        val data = Array(count) { "it = $it" }
-        for (i in 0 until count) {
-            data[i] = "Book $i"
-        }
-        return data
     }
 
 }

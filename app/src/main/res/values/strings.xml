@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">My Reads - PEC1</string>
     <string name="book_sample_details">Book details...</string>
+    <string name="book_picture">Book picture</string>
 </resources>
