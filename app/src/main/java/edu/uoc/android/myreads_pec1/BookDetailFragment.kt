@@ -9,6 +9,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 import edu.uoc.android.myreads_pec1.model.BookModel
 import kotlinx.android.synthetic.main.fragment_book_detail.view.*
 import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * A fragment representing a single Item detail screen.
@@ -19,7 +20,7 @@ import java.text.SimpleDateFormat
 class BookDetailFragment : Fragment() {
 
     private var book: BookModel.BookItem? = null
-    private val formatter = SimpleDateFormat("dd/MM/yyyy")
+    private val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.UK)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,9 +52,9 @@ class BookDetailFragment : Fragment() {
 
         // if book != null
         book?.let {
-            rootView.author.text = it.author
-            rootView.date.text = formatter.format(it.publicationDate)
-            rootView.description.text = it.description
+            rootView.bookAuthor.text = it.author
+            rootView.bookDate.text = formatter.format(it.publicationDate)
+            rootView.bookDescription.text = it.description
         }
 
         return rootView

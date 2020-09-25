@@ -4,4 +4,5 @@
     <string name="book_picture">Book picture</string>
     <string name="sort_by_title">Sort by title</string>
     <string name="sort_by_author">Sort by author</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dignissim vitae eros vitae consectetur. Etiam vel augue augue. In sed quam nisi. Sed sapien sem, tempor in ipsum quis, mollis rutrum velit. Nullam faucibus, ipsum sed pulvinar porta, urna arcu dignissim velit, non aliquam augue nisl sed ipsum. Nullam porta pharetra facilisis. Suspendisse dolor quam, sollicitudin nec volutpat pretium, dictum quis mauris. Phasellus vitae aliquet elit, id mollis turpis. Duis erat sem, hendrerit ac tristique sit amet, sagittis in nisl. Vestibulum laoreet sit amet risus at placerat. Sed feugiat ipsum id nulla ullamcorper sollicitudin ac in erat. Sed vestibulum vehicula dolor, quis dapibus dui facilisis ac.</string>
 </resources>
