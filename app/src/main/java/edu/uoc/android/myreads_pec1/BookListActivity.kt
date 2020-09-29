@@ -3,8 +3,11 @@ package edu.uoc.android.myreads_pec1
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import edu.uoc.android.myreads_pec1.adapter.RecyclerViewAdapter
 import edu.uoc.android.myreads_pec1.model.BookModel
 import kotlinx.android.synthetic.main.activity_book_list.*
@@ -77,7 +80,18 @@ class BookListActivity : AppCompatActivity() {
      */
     private fun setupRecyclerView(recyclerView: RecyclerView) {
         recyclerView.adapter = RecyclerViewAdapter(BookModel.BOOKS,
-            twoPane, supportFragmentManager)
+            twoPane, this, supportFragmentManager)
 
+        val staggeredGridLayoutManager = StaggeredGridLayoutManager(
+            COLUMNS,
+            LinearLayoutManager.VERTICAL)
+
+        if (!twoPane) {
+            recyclerView.layoutManager = staggeredGridLayoutManager
+        }
+    }
+
+    companion object LayoutData {
+        const val COLUMNS = 2
     }
 }

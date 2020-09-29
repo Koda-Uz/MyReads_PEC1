@@ -1,18 +1,23 @@
 package edu.uoc.android.myreads_pec1.adapter
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import edu.uoc.android.myreads_pec1.BookDetailActivity
 import edu.uoc.android.myreads_pec1.BookDetailFragment
 import edu.uoc.android.myreads_pec1.R
 import edu.uoc.android.myreads_pec1.model.BookModel
 import kotlinx.android.synthetic.main.view_holder_odd.view.*
+import kotlinx.android.synthetic.main.view_holder_odd.view.title
+import kotlinx.android.synthetic.main.view_holder_phone.view.*
 
 /**
  * This class implements a simple adapter for the RecyclerView
@@ -23,9 +28,12 @@ import kotlinx.android.synthetic.main.view_holder_odd.view.*
  * @param twoPane: Boolean indicating app mode
  * @param fragmentManager: Fragment manager for loading details fragment
  */
-class RecyclerViewAdapter(private val myData: MutableList<BookModel.BookItem>,
-                          private val twoPane: Boolean,
-                          private val fragmentManager: FragmentManager) :
+class RecyclerViewAdapter(
+    private val myData: MutableList<BookModel.BookItem>,
+    private val twoPane: Boolean,
+    private val context: Context,
+    private val fragmentManager: FragmentManager
+) :
     RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     // OnClickListener
@@ -65,15 +73,22 @@ class RecyclerViewAdapter(private val myData: MutableList<BookModel.BookItem>,
      * Creates new views
      * Will create different views for even and odd numbers
      */
-    override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder {
 
-        val view = if (viewType == ODD) {
+        val view = if (!twoPane) {
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.view_holder_odd, parent, false) as View
+                .inflate(R.layout.view_holder_phone, parent, false) as View
         } else {
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.view_holder_even, parent, false) as View
+            if (viewType == ODD) {
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.view_holder_odd, parent, false) as View
+            } else {
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.view_holder_even, parent, false) as View
+            }
         }
 
         return ViewHolder(view)
@@ -88,11 +103,22 @@ class RecyclerViewAdapter(private val myData: MutableList<BookModel.BookItem>,
          */
         val book = myData[position]
         holder.title.text = book.title
-        holder.author.text = book.author
+        holder.author?.let {
+            it.text = book.author
+        }
         holder.id = book.id
+        if (!twoPane) {
+            holder.image?.let {
+                Picasso.with(context)
+                    .load(book.imageUrl)
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .error(R.drawable.ic_launcher_foreground)
+                    .into(it)
+            }
+        }
         with(holder.itemView) {
             tag = book
-            setOnClickListener (onClickListener)
+            setOnClickListener(onClickListener)
         }
     }
 
@@ -100,7 +126,7 @@ class RecyclerViewAdapter(private val myData: MutableList<BookModel.BookItem>,
      * Returns 0 for even items, 1 for odd items
      */
     override fun getItemViewType(position: Int): Int {
-        return  position % 2
+        return position % 2
     }
 
     /**
@@ -113,8 +139,9 @@ class RecyclerViewAdapter(private val myData: MutableList<BookModel.BookItem>,
      * More data will be added later
      */
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title: TextView = view.findViewById(R.id.title)
-        val author: TextView = view.findViewById(R.id.author)
+        val title: TextView = view.title
+        val author: TextView? = view.author
+        val image: ImageView? = view.image
         var id = 0
     }
 

@@ -5,6 +5,9 @@
     android:id="@+id/book_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fadingEdge="horizontal"
+    android:fadingEdgeLength="40dp"
+    android:requiresFadingEdge="vertical"
     app:layoutManager="LinearLayoutManager"
     tools:context=".BookListActivity"
     tools:listitem="@layout/view_holder_odd" />

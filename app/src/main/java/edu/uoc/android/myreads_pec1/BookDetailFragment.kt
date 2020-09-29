@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.squareup.picasso.Picasso
 import edu.uoc.android.myreads_pec1.model.BookModel
+import kotlinx.android.synthetic.main.fragment_book_detail.*
 import kotlinx.android.synthetic.main.fragment_book_detail.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -55,6 +57,10 @@ class BookDetailFragment : Fragment() {
             rootView.bookAuthor.text = it.author
             rootView.bookDate.text = formatter.format(it.publicationDate)
             rootView.bookDescription.text = it.description
+            Picasso.with(context)
+                .load(it.imageUrl)
+                .placeholder(R.drawable.book)
+                .into(rootView.bookImage)
         }
 
         return rootView
